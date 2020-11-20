@@ -1,0 +1,100 @@
+{{> navbar user}}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+            <div class="jumbotron">
+                <h4 class="display-6">Hello, {{user.email}}!</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md">
+            <legend>Event Posts</legend>
+            <div id="event-posts">
+            {{#each eventposts}}
+            <div class="event-post-card card text-white bg-primary mb-3">
+                <div class="card-header"><h4 class="text-white">{{event}}</h4></div>
+                <div class="card-body">
+                    <p class="card-text">{{description}}</p>
+                    by {{'User.email'}}
+                    @ {{createdAt}}
+                </div>
+            </div>
+            {{/each}}
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-md">
+            <form class="event-post">
+                <fieldset>
+                    <legend>Create Your Own Event Post</legend>
+                    <p>
+                        Type in your event post title and body below, and click submit to send it to our database. We will register it with your email address, and display it above with everyone else's posts!</p>
+                    </p>
+                    <div class="form-group">
+                        <label for="event-input">Event Name</label>
+                        <input type="text" class="form-control" id="event-input" aria-describedby="postHelp"
+                            placeholder="Enter your event name">
+                        <small id="postHelp" class="form-text text-muted">This'l be shared!</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="description-input">Event Description</label>
+                        <textarea class="form-control" id="description-input" name="description"
+                            placeholder="Enter your event description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Post!</button>
+                </fieldset>
+            </form>
+            <br />
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Getting references to our form and inputs
+        const eventPostForm = $("form.event-post");
+        const eventInput = $("input#event-input");
+        const descriptionInput = $("textarea#description-input");
+
+        // When the form is submitted, we validate there's a title and body entered
+        eventPostForm.on("submit", function (event) {
+            event.preventDefault();
+            console.log(descriptionInput.val(), eventInput.val())
+            var eventPostData = {
+                event: eventInput.val().trim(),
+                description: descriptionInput.val().trim()
+            };
+
+            if (!eventPostData.event || !eventPostData.description) {
+                return;
+            }
+
+
+            // If we have a title and password  we run the sendPost function and clear the form
+            sendPost(eventPostData.event, eventPostData.description);
+            eventInput.val("");
+            descriptionInput.val("");
+        });
+
+        // sendPost does a post to our "api/posts" route and if successful, redirects us the the forum page
+        function sendPost(event, description) {
+            $.post("/api/eventposts", {
+                event: event,
+                description: description
+            })
+                .then(function () {
+                    window.location.replace("/postedevents");
+                    // If there's an error, log the error
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+        }
+    });
+</script>
