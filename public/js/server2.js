@@ -46,6 +46,7 @@ $(document).ready(() => {
   });
 });
 
+
 // $(document).ready(() => {
 //   const endpoint = "https://auth.predicthq.com/token";
 //   const token =
