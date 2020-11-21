@@ -45,22 +45,10 @@ router.get("/login", (req, res) => {
  * Forum Page -
  * Notice loading our posts, with that include!
  */
-router.get("/forum", isAuthenticated, (req, res) => {
+router.get("/dashboard", isAuthenticated, (req, res) => {
   db.Post.findAll({ raw: true, include: [db.User] }) // Joins User to Posts! And scrapes all the seqeulize stuff off
     .then((dbModel) => {
-      res.render("forum", { user: req.user, posts: dbModel });
-    })
-    .catch((err) => res.status(422).json(err));
-});
-
-/**
- * Posted Events Page -
- * Notice loading our event posts, with that include!
- */
-router.get("/postedevents", isAuthenticated, (req, res) => {
-  db.EventPost.findAll({ raw: true, include: [db.User] }) // Joins User to Posts! And scrapes all the seqeulize stuff off
-    .then((dbModel) => {
-      res.render("postedevents", { user: req.user, eventposts: dbModel });
+      res.render("dashboard", { user: req.user, posts: dbModel });
     })
     .catch((err) => res.status(422).json(err));
 });
