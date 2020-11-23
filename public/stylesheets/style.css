@@ -15,3 +15,15 @@ footer {
   text-align: center;
   background-color: black;
 }
+
+.signup-adjust {
+  font-size: large;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centering {
+  text-align: center;
+}
