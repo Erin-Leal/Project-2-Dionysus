@@ -4,20 +4,20 @@
     <div class="row">
         <div class="col-md">
             <div class="jumbotron">
-                <h4 class="display-6">Hello, {{user.email}}!</h4>
+                <h4 class="display-6 centering">Hello, {{user.email}}!</h4>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md">
-            <legend>Event Posts</legend>
+            <legend class = "secret-pad">.......................</legend>
             <div id="event-posts">
                 {{#each eventposts}}
                 <div class="event-post-card card text-white bg-primary mb-3">
-                    <div class="card-header">
+                    <div class="card-header navbar-coloring">
                         <h4 class="text-white">{{event}}</h4>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body navbar-coloring">
                         <p class="card-text">Date: {{date}}</p>
                         <p class="card-text">Time: {{time}}</p>
                         <p class="card-text">Location: {{location}}</p>
@@ -37,16 +37,14 @@
         <div class="col-md">
             <form class="event-post">
                 <fieldset>
-                    <legend>Create Your Own Event Post</legend>
+                    <legend class = "centering big-words">Post your events!</legend>
                     <p>
-                        Type in your event post title and body below, and click submit to send it to our database. We
-                        will register it with your email address, and display it above with everyone else's posts!</p>
+                        Fill out the fields below for the details of the event you want to organize, once you submit it it'll show up here with posts from other users.
                     </p>
                     <div class="form-group">
                         <label for="event-input">Event Name</label>
                         <input type="text" class="form-control" id="event-input" aria-describedby="postHelp"
                             placeholder="Enter your event name">
-                        <small id="postHelp" class="form-text text-muted">This'l be shared!</small>
                     </div>
                     <div class="form-group">
                         <label for="date-input">Date of Event</label>
@@ -68,7 +66,7 @@
                         <textarea class="form-control" id="description-input" name="description"
                             placeholder="Enter the description of your event"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Post!</button>
+                    <button type="submit" class="btn btn-primary navbar-coloring">Post!</button>
                 </fieldset>
             </form>
             <br />

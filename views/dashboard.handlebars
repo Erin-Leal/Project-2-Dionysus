@@ -4,18 +4,18 @@
     <div class="row">
         <div class="col-md">
             <div class="jumbotron">
-                <h4 class="display-6">Hello, {{user.email}}!</h4>
+                <h4 class="display-6 centering">Hello, {{user.email}}!</h4>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md">
-            <legend>Forum Posts</legend>
+            <legend class = "secret-pad">.......................</legend>
             <div id="forum-posts">
             {{#each posts}}
             <div class="forum-post-card card text-white bg-primary mb-3">
-                <div class="card-header"><h4 class="text-white">{{title}}</h4></div>
-                <div class="card-body">
+                <div class="card-header navbar-coloring"><h4 class="text-white">{{title}}</h4></div>
+                <div class="card-body navbar-coloring">
                     <p class="card-text">{{body}}</p>
                     by {{'User.email'}}
                     @ {{createdAt}}
@@ -32,22 +32,23 @@
         <div class="col-md">
             <form class="forum-post">
                 <fieldset>
-                    <legend>Create Your Own Post</legend>
+                    <legend class = "centering big-words">Post your blurbs!</legend>
+                    <div class = "secret-pad">...................</div>
+                    <div class = "secret-pad">...................</div>
                     <p>
-                        Type in your post title and body below, and click submit to send it to our database. We will register it with your email address, and display it above with everyone else's posts!</p>
+                        Got a small notice that doesn't fit in an event post? Share it here! The same people will see it, so you can keep everyone in the loop.
                     </p>
                     <div class="form-group">
                         <label for="title-input">Title</label>
                         <input type="text" class="form-control" id="title-input" aria-describedby="postHelp"
                             placeholder="Enter your post title">
-                        <small id="postHelp" class="form-text text-muted">This'l be shared!</small>
                     </div>
                     <div class="form-group">
-                        <label for="body-input">Body</label>
+                        <label for="body-input">Content</label>
                         <textarea class="form-control" id="body-input" name="body"
                             placeholder="Enter your post body"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Post!</button>
+                    <button type="submit" class="btn btn-primary navbar-coloring">Post!</button>
                 </fieldset>
             </form>
             <br />

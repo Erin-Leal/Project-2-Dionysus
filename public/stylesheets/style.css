@@ -13,7 +13,6 @@ form.login {
 
 footer {
   text-align: center;
-  background-color: black;
 }
 
 .signup-adjust {
@@ -27,3 +26,17 @@ footer {
 .centering {
   text-align: center;
 }
+
+.navbar-coloring {
+  background-color: cornflowerblue;
+  background-image: none;
+  background-repeat: no-repeat;
+ }
+
+ .secret-pad {
+   color: white;
+ }
+
+ .big-words {
+  font-size: xx-large ;
+ }
