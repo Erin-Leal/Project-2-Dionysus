@@ -7,6 +7,21 @@ module.exports = function (sequelize, DataTypes) {
         len: [1],
       },
     },
+    date: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      len: [1],
+    },
+    time: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      len: [1],
+    },
+    location: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      len: [1],
+    },
     description: {
       type: DataTypes.TEXT,
       allowNull: false,

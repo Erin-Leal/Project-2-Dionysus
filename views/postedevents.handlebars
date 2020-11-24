@@ -12,16 +12,21 @@
         <div class="col-md">
             <legend>Event Posts</legend>
             <div id="event-posts">
-            {{#each eventposts}}
-            <div class="event-post-card card text-white bg-primary mb-3">
-                <div class="card-header"><h4 class="text-white">{{event}}</h4></div>
-                <div class="card-body">
-                    <p class="card-text">{{description}}</p>
-                    by {{'User.email'}}
-                    @ {{createdAt}}
+                {{#each eventposts}}
+                <div class="event-post-card card text-white bg-primary mb-3">
+                    <div class="card-header">
+                        <h4 class="text-white">{{event}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Date: {{date}}</p>
+                        <p class="card-text">Time: {{time}}</p>
+                        <p class="card-text">Location: {{location}}</p>
+                        <p class="card-text">Description: {{description}}</p>
+                        by {{'User.email'}}
+                        @ {{createdAt}}
+                    </div>
                 </div>
-            </div>
-            {{/each}}
+                {{/each}}
             </div>
         </div>
 
@@ -34,7 +39,8 @@
                 <fieldset>
                     <legend>Create Your Own Event Post</legend>
                     <p>
-                        Type in your event post title and body below, and click submit to send it to our database. We will register it with your email address, and display it above with everyone else's posts!</p>
+                        Type in your event post title and body below, and click submit to send it to our database. We
+                        will register it with your email address, and display it above with everyone else's posts!</p>
                     </p>
                     <div class="form-group">
                         <label for="event-input">Event Name</label>
@@ -43,9 +49,24 @@
                         <small id="postHelp" class="form-text text-muted">This'l be shared!</small>
                     </div>
                     <div class="form-group">
+                        <label for="date-input">Date of Event</label>
+                        <textarea class="form-control" id="date-input" name="date"
+                            placeholder="Enter the date of your event"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="time-input">Time of Event</label>
+                        <textarea class="form-control" id="time-input" name="time"
+                            placeholder="Enter the time of your event"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="location-input">Location of Event</label>
+                        <textarea class="form-control" id="location-input" name="location"
+                            placeholder="Enter the location of your event"></textarea>
+                    </div>
+                    <div class="form-group">
                         <label for="description-input">Event Description</label>
                         <textarea class="form-control" id="description-input" name="description"
-                            placeholder="Enter your event description"></textarea>
+                            placeholder="Enter the description of your event"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Post!</button>
                 </fieldset>
@@ -60,14 +81,20 @@
         // Getting references to our form and inputs
         const eventPostForm = $("form.event-post");
         const eventInput = $("input#event-input");
+        const dateInput = $("textarea#date-input");
+        const timeInput = $("textarea#time-input");
+        const locationInput = $("textarea#location-input");
         const descriptionInput = $("textarea#description-input");
 
         // When the form is submitted, we validate there's a title and body entered
         eventPostForm.on("submit", function (event) {
             event.preventDefault();
-            console.log(descriptionInput.val(), eventInput.val())
+            console.log(descriptionInput.val(), locationInput.val(), timeInput.val(), dateInput.val(), eventInput.val())
             var eventPostData = {
                 event: eventInput.val().trim(),
+                date: dateInput.val().trim(),
+                time: timeInput.val().trim(),
+                location: locationInput.val().trim(),
                 description: descriptionInput.val().trim()
             };
 
@@ -77,15 +104,21 @@
 
 
             // If we have a title and password  we run the sendPost function and clear the form
-            sendPost(eventPostData.event, eventPostData.description);
+            sendPost(eventPostData.event, eventPostData.date, eventPostData.time, eventPostData.location, eventPostData.description);
             eventInput.val("");
+            dateInput.val("");
+            timeInput.val("");
+            locationInput.val("");
             descriptionInput.val("");
         });
 
         // sendPost does a post to our "api/posts" route and if successful, redirects us the the forum page
-        function sendPost(event, description) {
+        function sendPost(event, date, time, location, description) {
             $.post("/api/eventposts", {
                 event: event,
+                date: date,
+                time: time,
+                location: location,
                 description: description
             })
                 .then(function () {
