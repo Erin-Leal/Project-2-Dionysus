@@ -1,7 +1,7 @@
 $(document).ready(() => {
-  $("#button-addon2").on("click", function () {
+  $("#button-addon2").on("click", () => {
     const endpoint = "https://auth.predicthq.com/token";
-    let search = $(".form-control").val().trim()
+    const search = $(".form-control").val().trim();
     const token =
       "M1FCSGdRYWxvZ0U6VW1hRUxrUnYzZ0Q3TFdiV3pEYzZQb2JDdUVuWXJBX2JNdms1aklCb0dsLWRMa0tUaThwS3d3";
     let accessToken = null;
@@ -44,27 +44,32 @@ $(document).ready(() => {
             console.log(eventsresponse, placesresponse);
             $("#description").empty();
             for (let i = 0; i < 10; i++) {
-              let titleValue = $("<h4>").text(eventsresponse.results[i].title).addClass("title is-5");
-              let dateResponse = eventsresponse.results[i].start;
-              var startTimeDate = new Date(dateResponse);
-              let dateFinal = $("<p>").text("Date: " + startTimeDate);
-              let address = $("<p>").text("Address: " + eventsresponse.results[1].entities[0].formatted_address);
-              let eventDesc = $("<p>").text("Description: " + eventsresponse.results[i].description);
-
+              const titleValue = $("<h4>")
+                .text(eventsresponse.results[i].title)
+                .addClass("title is-5");
+              const dateResponse = eventsresponse.results[i].start;
+              const startTimeDate = new Date(dateResponse);
+              const dateFinal = $("<p>").text("Date: " + startTimeDate);
+              const address = $("<p>").text(
+                "Address: " +
+                  eventsresponse.results[1].entities[0].formatted_address
+              );
+              const eventDesc = $("<p>").text(
+                "Description: " + eventsresponse.results[i].description
+              );
 
               $("#description").append(titleValue, dateFinal, address);
               if (eventsresponse.results[i].description === "") {
-
+                //console.log(eventsresponse);
               } else {
                 $("#description").append(eventDesc);
               }
-
             }
           });
         });
       });
     });
-  })
+  });
 });
 
 // $(document).ready(() => {

@@ -4,50 +4,50 @@ const router = require("express").Router();
 /**
  * Post - Read All
  */
-router.get("/", function(req, res) {
+router.get("/", (req, res) => {
   db.EventPost.findAll(req.query)
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
+    .then((dbModel) => res.json(dbModel))
+    .catch((err) => res.status(422).json(err));
 });
 
 /**
  * Post - Read One
  */
-router.get("/:id", function(req, res) {
+router.get("/:id", (req, res) => {
   db.EventPost.findByPk(req.params.id)
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
+    .then((dbModel) => res.json(dbModel))
+    .catch((err) => res.status(422).json(err));
 });
 
-/** 
+/**
  * Post - Create
  * Notice how we are also taking in the User Id! Important!
  */
-router.post("/", function(req, res) {
+router.post("/", (req, res) => {
   db.EventPost.create({
     UserId: req.user.id,
-    ...req.body
+    ...req.body,
   })
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
+    .then((dbModel) => res.json(dbModel))
+    .catch((err) => res.status(422).json(err));
 });
 
 /**
  * Post - Update
  */
-router.put("/:id", function(req, res) {
-  db.EventPost.update(req.body, { where: { id: req.params.id }})
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
+router.put("/:id", (req, res) => {
+  db.EventPost.update(req.body, { where: { id: req.params.id } })
+    .then((dbModel) => res.json(dbModel))
+    .catch((err) => res.status(422).json(err));
 });
 
 /**
  * Post - Delete
  */
-router.delete("/:id", function(req, res) {
-  db.EventPost.destroy({ where: { id: req.params.id }})
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
+router.delete("/:id", (req, res) => {
+  db.EventPost.destroy({ where: { id: req.params.id } })
+    .then((dbModel) => res.json(dbModel))
+    .catch((err) => res.status(422).json(err));
 });
 
 // Defining methods for the booksController
